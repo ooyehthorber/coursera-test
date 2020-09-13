@@ -1,0 +1,130 @@
+body {
+  width: 100%;
+  margin: auto;
+}
+
+
+/** HEADER **/
+#header-nav {
+  background-color: gray;
+  border-radius: 0;
+  border: 2px black;
+  min-height: 70px;
+}
+.container{
+  margin-left: 10px;
+  padding: 0 0 0 0;
+  width: 100%;
+}
+#nav-list a {
+  color: black;
+  text-align: center;
+  border-color: black;
+}
+.navbar-brand {
+  padding-top: 25px;
+}
+
+.navbar-brand h1 { /* Restaurant name */
+  color: black;
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: .75;
+  float: left;
+  margin-left: 15px;
+}
+
+
+/********** Extra small devices only **********/
+@media (max-width: 767px) {
+  /* Header */ 
+  .navbar-brand {
+    padding-top: 10px;
+    height: 80px;
+  }
+  .navbar-brand h1 { /* Restaurant name */
+    padding-top: 20px;
+    font-size: 1.5em;
+    margin-left: 35px;
+  }
+  .container{
+   margin-left: auto;
+   margin-right: auto;
+   width: 100%;
+  }
+
+  #collapsable-nav{
+   width: 100%;
+   margin: 0 0 0 0;
+   border-color: black;
+   padding-left: 0;
+   padding-right: 0;
+  }
+  .navbar-toggle {
+    margin-right: 25px;
+  }
+  #header-nav {
+   width: 100%;
+  }
+  .navbar-header{
+    margin: 0 0 0 0;
+    border: 1px solid;
+  }
+  #nav-list {
+    margin: 0 0 0 0;
+    border-color: black;
+  }
+  li{
+   border-color: black;
+   background-color: white;
+   border: 2px solid;
+   border-top: 0;
+  }
+  #boxchicken {
+   box-sizing: border-box;
+   margin-bottom: 5px;
+   padding: 10px;
+   align-content: center;
+   position: relative;
+   overflow: auto;
+   width: 100%
+  }
+}
+
+p{
+  padding: 7px;
+}
+
+h2{
+  margin-bottom: 15px;
+}
+
+h4{
+  margin-bottom: 0px;
+  margin-top: 0px;
+}
+#boxchicken {
+  box-sizing: border-box;
+  margin-bottom: 5px;
+  padding: 15px;
+  align-content: center;
+  position: relative;
+  overflow: auto;
+  width: 100%;
+}
+#content{
+  background-color: gray;
+  position: relative;
+  height: 320px;
+  width: 100%
+  margin-right: 15px;
+  margin-left: 15px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  font-family: Helvetica;
+  color: black;
+  padding: 10px;
+  margin-right: 15px;
+}
