@@ -86,17 +86,8 @@ $ajaxUtils.sendGetRequest(
   buildAndShowHomeHTML, // ***** <---- TODO: STEP 1: Substitute [...] ******
   true); // Explicitly setting the flag to get JSON from server processed into an object literal
 });
-
-
 // *** finish **
-// Load the menu items view
-// 'categoryShort' is a short_name for a category
-dc.loadMenuItems = function (categoryShort) {
-  showLoading("#main-content");
-  $ajaxUtils.sendGetRequest(
-    menuItemsUrl + categoryShort,
-    buildAndShowMenuItemsHTML);
-};
+
 
 // Builds HTML for the home page based on categories array
 // returned from the server.
@@ -106,62 +97,35 @@ function buildAndShowHomeHTML (categories) {
   $ajaxUtils.sendGetRequest(
     homeHtmlUrl,
     function (homeHtml) {
-      $ajaxUtils.sendGetRequest(
-        categoryHtml,
-        function (categoryHtml) {
-       // TODO: STEP 2: Here, call chooseRandomCategory, passing it retrieved 'categories'
-       // Pay attention to what type of data that function returns vs what the chosenCategoryShortName
-       // variable's name implies it expects.
-       var chosenCategoryShortName =             
-         buildCategoriesViewHtml(categories,
-                                 homeHtml,
-                                 categoryHtml);
-      insertHtml("#main-content", chosenCategoryShortName);
-      }
-      false);
+
+      // TODO: STEP 2: Here, call chooseRandomCategory, passing it retrieved 'categories'
+      // Pay attention to what type of data that function returns vs what the chosenCategoryShortName
+      // variable's name implies it expects.
+       var chosenCategoryShortName = chooseRandomCategory(categories);
+
+
+      // TODO: STEP 3: Substitute {{randomCategoryShortName}} in the home html snippet with the
+      // chosen category from STEP 2. Use existing insertProperty function for that purpose.
+      // Look through this code for an example of how to do use the insertProperty function.
+      // WARNING! You are inserting something that will have to result in a valid Javascript
+      // syntax because the substitution of {{randomCategoryShortName}} becomes an argument
+      // being passed into the $dc.loadMenuItems function. Think about what that argument needs
+      // to look like. For example, a valid call would look something like this:
+      // $dc.loadMenuItems('L')
+      // Hint: you need to surround the chosen category short name with something before inserting
+      // it into the home html snippet.
+       var html= homeHtml
+       var chosen_short_name = "'" + chosenCategoryShortName.short_name + "'"
+       var homeHtmlToInsertIntoMainPage = insertProperty(html, 'randomCategoryShortName', chosen_short_name)
+
+
+      // TODO: STEP 4: Insert the the produced HTML in STEP 3 into the main page
+      // Use the existing insertHtml function for that purpose. Look through this code for an example
+      // of how to do that.
+       insertHtml("#main-content", homeHtmlToInsertIntoMainPage);
+
     },
-    false);
-}    
-  
-// TODO: STEP 3: Substitute {{randomCategoryShortName}} in the home html snippet with the
-// chosen category from STEP 2. Use existing insertProperty function for that purpose.
-// Look through this code for an example of how to do use the insertProperty function.
-// WARNING! You are inserting something that will have to result in a valid Javascript
-// syntax because the substitution of {{randomCategoryShortName}} becomes an argument
-// being passed into the $dc.loadMenuItems function. Think about what that argument needs
-// to look like. For example, a valid call would look something like this:
-// $dc.loadMenuItems('L')
-// Hint: you need to surround the chosen category short name with something before inserting
-// it into the home html snippet.
-function buildCategoriesViewHtml(categories,
-                                 homeHtml,
-                                 categoryHtml) 
-  var homeHtmlToInsertIntoMainPage = homeHtml;
-  homeHtmlToInsertIntoMainPage += "<section class='row'>";
-
-
-  // TODO: STEP 4: Insert the the produced HTML in STEP 3 into the main page
-  // Use the existing insertHtml function for that purpose. Look through this code for an example
-  // of how to do that.
-
-  // Loop over categories
-  for (var i = 0; i < categories.length; i++) {
-   // Insert category values
-   var html = categoryHtml;
-   var name = "" + categories[i].name;
-   var short_name = categories[i].short_name;
-   html =
-     insertProperty(html, "name", name);
-   html =
-      insertProperty(html,
-                       "short_name",
-                       short_name);
-    finalHtml += html;
-  }
-  
-  finalHtml += "</section>";
-  return finalHtml;
-  false); // False here because we are getting just regular HTML from the server, so no need to process JSON.
+    false); // False here because we are getting just regular HTML from the server, so no need to process JSON.
 }
 
 
